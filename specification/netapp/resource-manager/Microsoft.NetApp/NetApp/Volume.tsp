@@ -80,6 +80,7 @@ model VolumeProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -271,6 +272,7 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
@@ -415,6 +417,7 @@ model VolumeProperties {
    * delivering higher capacity limit with lower costs.
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -440,6 +443,7 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   language?: VolumeLanguage;
 
@@ -447,6 +451,7 @@ model VolumeProperties {
    * Specifies whether the volume operates in Breakthrough Mode.
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -475,6 +480,7 @@ union LdapServerType {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union VolumeLanguage {
   string,
@@ -978,6 +984,7 @@ model VolumePropertiesDataProtection {
    * Advanced Ransomware Protection settings
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   ransomwareProtection?: RansomwareProtectionSettings;
 }
 
@@ -1062,6 +1069,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
@@ -1074,6 +1082,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
@@ -1086,6 +1095,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
@@ -1098,6 +1108,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
@@ -1111,6 +1122,7 @@ model ReplicationObject {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
@@ -1295,6 +1307,7 @@ model VolumePatchProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1411,6 +1424,7 @@ model VolumePatchPropertiesDataProtection {
    * Advanced Ransomware Protection updatable settings
    */
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
 
@@ -2105,6 +2119,7 @@ union LargeVolumeType {
  * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 union BreakthroughMode {
   string,
 
@@ -2127,6 +2142,7 @@ union BreakthroughMode {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
@@ -2144,6 +2160,7 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
@@ -2181,6 +2198,7 @@ model QuotaReport {
  * Advanced Ransomware Protection reports (ARP) settings
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 model RansomwareProtectionSettings {
   /**
    * The desired value of the Advanced Ransomware Protection feature state available to the volume
@@ -2198,6 +2216,7 @@ model RansomwareProtectionSettings {
  * Advanced Ransomware Protection reports (ARP) updatable settings
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 model RansomwareProtectionPatchSettings {
   /**
    * The desired value of the ARP feature state available to the volume
@@ -2209,6 +2228,7 @@ model RansomwareProtectionPatchSettings {
  * The desired state of the Advanced Ransomware Protection feature
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 union DesiredRansomwareProtectionState {
   string,
 
@@ -2227,6 +2247,7 @@ union DesiredRansomwareProtectionState {
  * The actual state of the Advanced Ransomware Protection feature
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 union ActualRansomwareProtectionState {
   string,
 
@@ -2623,6 +2644,7 @@ interface Volumes {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   listQuotaReport is ArmResourceActionAsync<
     Volume,

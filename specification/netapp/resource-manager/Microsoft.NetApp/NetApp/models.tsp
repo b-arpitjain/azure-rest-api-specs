@@ -244,6 +244,7 @@ union KeySource {
  * The encryption keySource (provider) for ANF Elastic resources. Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
  */
 @added(Versions.v2025_09_01_preview)
+@added(Versions.v2025_12_15_preview)
 union ElasticKeySource {
   string,
 
