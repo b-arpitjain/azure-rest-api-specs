@@ -135,17 +135,17 @@ model ElasticEncryptionIdentity {
 interface ElasticAccounts {
   /** Get the NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticAccount>;
 
   /** Create or update the specified NetApp Elastic Account within the resource group */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticAccount>;
 
   /** Patch the specified NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticAccount,
@@ -157,17 +157,17 @@ interface ElasticAccounts {
 
   /** Delete the specified NetApp elastic account */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the resource group. */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listByResourceGroup is ArmResourceListByParent<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the subscription. */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listBySubscription is ArmListBySubscription<ElasticAccount>;
 }
 

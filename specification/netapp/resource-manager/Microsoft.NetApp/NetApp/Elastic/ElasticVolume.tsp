@@ -387,17 +387,17 @@ union SnapshotDirectoryVisibility {
 interface ElasticVolumes {
   /** Get the details of the specified volume */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticVolume>;
 
   /** Create or update the specified volume within the capacity pool */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticVolume>;
 
   /** Patch the specified elastic volume */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticVolume,
@@ -409,17 +409,17 @@ interface ElasticVolumes {
 
   /** Delete the specified Elastic Volume */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticVolume>;
 
   /** List all Elastic Volumes within the Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listByElasticPool is ArmResourceListByParent<ElasticVolume>;
 
   /** Revert an Elastic Volume to the snapshot specified in the body */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   revert is ArmResourceActionAsync<
     ElasticVolume,
     ElasticVolumeRevert,

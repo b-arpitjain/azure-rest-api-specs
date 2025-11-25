@@ -205,15 +205,15 @@ model ElasticSnapshotPolicyVolumeList is Azure.Core.Page<ElasticVolume>;
 @armResourceOperations
 interface ElasticSnapshotPolicies {
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticSnapshotPolicy>;
 
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshotPolicy>;
 
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     ElasticSnapshotPolicy,
@@ -223,10 +223,10 @@ interface ElasticSnapshotPolicies {
     >
   >;
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshotPolicy>;
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticSnapshotPolicy>;
 
   /**
@@ -236,7 +236,7 @@ interface ElasticSnapshotPolicies {
   @get
   @action("elasticvolumes")
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listElasticVolumes is ArmResourceActionSync<
     ElasticSnapshotPolicy,
     void,

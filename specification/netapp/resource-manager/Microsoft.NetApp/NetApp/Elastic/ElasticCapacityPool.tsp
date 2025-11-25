@@ -252,17 +252,17 @@ model CheckElasticResourceAvailabilityResponse {
 interface ElasticCapacityPools {
   /** Get the NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticCapacityPool>;
 
   /** Create or update the specified NetApp Elastic Capacity Pool within the resource group and NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticCapacityPool>;
 
   /** Patch the specified NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticCapacityPool,
@@ -274,19 +274,19 @@ interface ElasticCapacityPools {
 
   /** Delete the specified NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticCapacityPool>;
 
   /** List and describe all NetApp Elastic Capacity Pools in the Elastic NetApp Account. */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticCapacityPool>;
 
   /**
    * Moves pool to another zone
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   changeZone is ArmResourceActionAsync<
     ElasticCapacityPool,
     ChangeZoneRequest,
@@ -295,7 +295,7 @@ interface ElasticCapacityPools {
 
   /** Check if an Elastic Volume file path is available within the given Elastic Capacity Pool. */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   checkVolumeFilePathAvailability is ArmResourceActionSync<
     ElasticCapacityPool,
     CheckElasticVolumeFilePathAvailabilityRequest,

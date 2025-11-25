@@ -49,21 +49,21 @@ interface ElasticBackupVaults {
    * Get the Elastic Backup Vault
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticBackupVault>;
 
   /**
    * Create or update the specified Elastic Backup Vault in the Elastic NetApp account
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupVault>;
 
   /**
    * Patch the specified NetApp Elastic Backup Vault
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   update is ArmResourcePatchAsync<
     ElasticBackupVault,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -76,13 +76,13 @@ interface ElasticBackupVaults {
    * Delete the specified Elastic Backup Vault
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupVault>;
   /**
    * List and describe all Elastic Backup Vaults in the elastic account.
    */
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupVault>;
 }
 

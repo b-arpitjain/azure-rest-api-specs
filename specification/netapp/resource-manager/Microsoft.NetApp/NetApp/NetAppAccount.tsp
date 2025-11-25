@@ -86,7 +86,7 @@ model AccountProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
-@added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   ldapConfiguration?: LdapConfiguration;
 }

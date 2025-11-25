@@ -12432,6 +12432,9 @@
           }
         },
         "x-ms-examples": {
+          "VolumeGroups_List_Custom": {
+            "$ref": "./examples/VolumeGroups_List_Custom.json"
+          },
           "VolumeGroups_List_Oracle": {
             "$ref": "./examples/VolumeGroups_List_Oracle.json"
           },
@@ -12495,6 +12498,12 @@
           }
         },
         "x-ms-examples": {
+          "VolumeGroups_Get_Custom": {
+            "$ref": "./examples/VolumeGroups_Get_Custom.json"
+          },
+          "VolumeGroups_Get_Custom_SMB": {
+            "$ref": "./examples/VolumeGroups_Get_Custom_SMB.json"
+          },
           "VolumeGroups_Get_Oracle": {
             "$ref": "./examples/VolumeGroups_Get_Oracle.json"
           },
@@ -12573,6 +12582,12 @@
           }
         },
         "x-ms-examples": {
+          "VolumeGroups_Create_Custom": {
+            "$ref": "./examples/VolumeGroups_Create_Custom.json"
+          },
+          "VolumeGroups_Create_Custom_SMB": {
+            "$ref": "./examples/VolumeGroups_Create_Custom_SMB.json"
+          },
           "VolumeGroups_Create_Oracle": {
             "$ref": "./examples/VolumeGroups_Create_Oracle.json"
           },
@@ -13183,7 +13198,8 @@
       "description": "Application Type",
       "enum": [
         "SAP-HANA",
-        "ORACLE"
+        "ORACLE",
+        "CUSTOM"
       ],
       "x-ms-enum": {
         "name": "ApplicationType",
@@ -13196,6 +13212,11 @@
           {
             "name": "ORACLE",
             "value": "ORACLE"
+          },
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "Custom application type allows min 2 and max 12 data volumes in a volume group."
           }
         ]
       }

@@ -3,10 +3,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./NetAppAccount.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 
@@ -129,6 +131,12 @@ union ApplicationType {
   `SAP-HANA`: "SAP-HANA",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ORACLE: "ORACLE",
+
+  /**
+   * Custom application type allows min 2 and max 12 data volumes in a volume group.
+   */
+  @added(Versions.v2025_12_15_preview)
+  CUSTOM: "CUSTOM",
 }
 
 /**
