@@ -16,6 +16,7 @@ namespace Microsoft.NetApp;
  * File extension with length constraints
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @maxLength(1024)
 @minLength(1)
@@ -28,6 +29,7 @@ scalar Extensions extends string;
  * ARP creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of these ARP snapshots or another snapshot of your volume to restore data.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(Volume)
 model RansomwareReport
@@ -44,6 +46,7 @@ model RansomwareReport
  * List of Advanced Ransomware Protection (ARP) reports
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
 
@@ -55,6 +58,7 @@ model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
  * Advanced Ransomware Protection (ARP) creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of the ARP snapshots or another snapshot of your volume to restore data.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareReportProperties {
   /**
@@ -106,6 +110,7 @@ model RansomwareReportProperties {
  * Clear suspects for Advanced Ransomware Protection (ARP) report
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareSuspectsClearRequest {
   /**
@@ -124,6 +129,7 @@ model RansomwareSuspectsClearRequest {
  * List of suspects identified in an Advanced Ransomware Protection (ARP) report
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareSuspects {
   /**
@@ -156,6 +162,7 @@ model RansomwareSuspects {
  * Suspect file information
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SuspectFile {
   /**
@@ -175,6 +182,7 @@ model SuspectFile {
  * Severity of the Advanced Ransomware Protection (ARP) report
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union RansomwareReportSeverity {
   string,
@@ -204,6 +212,7 @@ union RansomwareReportSeverity {
  * State of the Advanced Ransomware Protection (ARP) report
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union RansomwareReportState {
   string,
@@ -223,6 +232,7 @@ union RansomwareReportState {
  * ARP report suspect resolution
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union RansomwareSuspectResolution {
   string,
@@ -239,6 +249,7 @@ union RansomwareSuspectResolution {
 }
 
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @armResourceOperations
 interface RansomwareReports {

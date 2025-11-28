@@ -69,7 +69,10 @@ model VolumeProperties {
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_12_01)
+  @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
+  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -80,6 +83,7 @@ model VolumeProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
@@ -272,6 +276,7 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -417,6 +422,7 @@ model VolumeProperties {
    * delivering higher capacity limit with lower costs.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
@@ -443,6 +449,7 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   language?: VolumeLanguage;
@@ -451,6 +458,7 @@ model VolumeProperties {
    * Specifies whether the volume operates in Breakthrough Mode.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   breakthroughMode?: BreakthroughMode;
 }
@@ -480,6 +488,7 @@ union LdapServerType {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union VolumeLanguage {
@@ -984,6 +993,7 @@ model VolumePropertiesDataProtection {
    * Advanced Ransomware Protection settings
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   ransomwareProtection?: RansomwareProtectionSettings;
 }
@@ -1069,6 +1079,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
@@ -1082,6 +1093,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
@@ -1095,6 +1107,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
@@ -1108,6 +1121,7 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
@@ -1122,6 +1136,7 @@ model ReplicationObject {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
@@ -1296,7 +1311,10 @@ model VolumePatchProperties {
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_12_01)
+  @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
+  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1307,6 +1325,7 @@ model VolumePatchProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
@@ -1424,6 +1443,7 @@ model VolumePatchPropertiesDataProtection {
    * Advanced Ransomware Protection updatable settings
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
@@ -2119,6 +2139,7 @@ union LargeVolumeType {
  * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union BreakthroughMode {
   string,
@@ -2142,6 +2163,7 @@ union BreakthroughMode {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
@@ -2160,6 +2182,7 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model QuotaReport {
@@ -2198,6 +2221,7 @@ model QuotaReport {
  * Advanced Ransomware Protection reports (ARP) settings
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareProtectionSettings {
   /**
@@ -2216,6 +2240,7 @@ model RansomwareProtectionSettings {
  * Advanced Ransomware Protection reports (ARP) updatable settings
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model RansomwareProtectionPatchSettings {
   /**
@@ -2228,6 +2253,7 @@ model RansomwareProtectionPatchSettings {
  * The desired state of the Advanced Ransomware Protection feature
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union DesiredRansomwareProtectionState {
   string,
@@ -2247,6 +2273,7 @@ union DesiredRansomwareProtectionState {
  * The actual state of the Advanced Ransomware Protection feature
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ActualRansomwareProtectionState {
   string,
@@ -2644,6 +2671,7 @@ interface Volumes {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   listQuotaReport is ArmResourceActionAsync<

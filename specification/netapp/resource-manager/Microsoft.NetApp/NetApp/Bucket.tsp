@@ -19,6 +19,7 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
@@ -38,6 +39,7 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketList is Azure.Core.Page<Bucket>;
 
@@ -49,6 +51,7 @@ model BucketList is Azure.Core.Page<Bucket>;
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketProperties {
   /**
@@ -96,6 +99,7 @@ model BucketProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model FileSystemUser {
   /**
@@ -117,6 +121,7 @@ model FileSystemUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model NfsUser {
   /**
@@ -138,6 +143,7 @@ model NfsUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model CifsUser {
   /**
@@ -154,6 +160,7 @@ model CifsUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketServerProperties {
   /**
@@ -200,6 +207,7 @@ model BucketServerProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -216,6 +224,7 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketPatchProperties {
   /**
@@ -253,6 +262,7 @@ model BucketPatchProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketServerPatchProperties {
   /**
@@ -277,6 +287,7 @@ model BucketServerPatchProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketCredentialsExpiry {
   /**
@@ -294,6 +305,7 @@ model BucketCredentialsExpiry {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketGenerateCredentials {
   /**
@@ -330,6 +342,7 @@ model BucketGenerateCredentials {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union CredentialsStatus {
   string,
@@ -358,6 +371,7 @@ union CredentialsStatus {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union BucketPermissions {
   string,
@@ -381,6 +395,7 @@ union BucketPermissions {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union BucketPatchPermissions {
   string,
@@ -401,6 +416,7 @@ union BucketPatchPermissions {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @armResourceOperations
 interface Buckets {
