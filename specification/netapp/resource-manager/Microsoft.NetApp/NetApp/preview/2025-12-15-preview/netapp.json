@@ -18719,7 +18719,7 @@
         "size": {
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776)."
+          "description": "Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776)."
         },
         "qosType": {
           "$ref": "#/definitions/QosType",
@@ -18752,7 +18752,7 @@
         "size": {
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).",
           "default": 4398046511104
         },
         "serviceLevel": {
