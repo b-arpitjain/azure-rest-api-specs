@@ -4404,6 +4404,9 @@
           "Accounts_CreateOrUpdate": {
             "$ref": "./examples/Accounts_CreateOrUpdate.json"
           },
+          "Accounts_CreateOrUpdateEntraIdConfig": {
+            "$ref": "./examples/Accounts_CreateOrUpdateEntraIdConfig.json"
+          },
           "Accounts_CreateOrUpdateLdapConfig": {
             "$ref": "./examples/Accounts_CreateOrUpdateLdapConfig.json"
           },
@@ -12743,6 +12746,38 @@
         }
       }
     },
+    "AccountPatchProperties": {
+      "type": "object",
+      "description": "NetApp account properties for patch operations",
+      "properties": {
+        "activeDirectories": {
+          "type": "array",
+          "description": "Active Directories",
+          "items": {
+            "$ref": "#/definitions/ActiveDirectory"
+          },
+          "x-ms-identifiers": [
+            "activeDirectoryId"
+          ]
+        },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfigPatch",
+          "description": "Entra ID configuration for the account."
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "Encryption settings"
+        },
+        "nfsV4IDDomain": {
+          "$ref": "#/definitions/VfsV4IDDomain",
+          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp Accounts in the subscription and region and only affect non ldap NFSv4 volumes."
+        },
+        "ldapConfiguration": {
+          "$ref": "#/definitions/LdapConfiguration",
+          "description": "LDAP Configuration for the account."
+        }
+      }
+    },
     "AccountProperties": {
       "type": "object",
       "description": "NetApp account properties",
@@ -12761,6 +12796,10 @@
           "x-ms-identifiers": [
             "activeDirectoryId"
           ]
+        },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfig",
+          "description": "Entra ID configuration for the account."
         },
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
@@ -12784,43 +12823,6 @@
         },
         "ldapConfiguration": {
           "$ref": "#/definitions/LdapConfiguration",
-          "description": "LDAP Configuration for the account."
-        }
-      }
-    },
-    "AccountPropertiesPatch": {
-      "type": "object",
-      "description": "NetApp account properties for PATCH operations",
-      "properties": {
-        "activeDirectories": {
-          "type": "array",
-          "description": "Active Directories",
-          "items": {
-            "$ref": "#/definitions/ActiveDirectory"
-          },
-          "x-ms-identifiers": [
-            "activeDirectoryId"
-          ]
-        },
-        "encryption": {
-          "$ref": "#/definitions/AccountEncryption",
-          "description": "Encryption settings"
-        },
-        "disableShowmount": {
-          "type": "boolean",
-          "description": "Shows the status of disableShowmount for all volumes under the subscription, null equals false"
-        },
-        "nfsV4IDDomain": {
-          "$ref": "#/definitions/VfsV4IDDomain",
-          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
-          "x-nullable": true
-        },
-        "multiAdStatus": {
-          "$ref": "#/definitions/MultiAdStatus",
-          "description": "MultiAD Status for the account"
-        },
-        "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfigurationPatch",
           "description": "LDAP Configuration for the account."
         }
       }
@@ -17125,6 +17127,133 @@
         ]
       }
     },
+    "EntraIdAkvConfig": {
+      "type": "object",
+      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Entra ID credentials are stored."
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "The name of the certificate in Azure Key Vault.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "azureKeyVaultUri",
+        "certificateName"
+      ]
+    },
+    "EntraIdAkvConfigPatch": {
+      "type": "object",
+      "description": "Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Entra ID credentials are stored."
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "The name of the certificate in Azure Key Vault.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "EntraIdConfig": {
+      "type": "object",
+      "description": "Entra ID configuration for the account.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the Active directory synced to Entra ID for hybrid identities.",
+          "maxLength": 255,
+          "pattern": "^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$"
+        },
+        "serverNamePrefix": {
+          "type": "string",
+          "description": "Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$"
+        },
+        "entraIdAkvConfig": {
+          "$ref": "#/definitions/EntraIdAkvConfig",
+          "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
+        }
+      },
+      "required": [
+        "applicationId",
+        "domain",
+        "serverNamePrefix"
+      ]
+    },
+    "EntraIdConfigPatch": {
+      "type": "object",
+      "description": "Entra ID Patch configuration for the account.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the Active directory synced to Entra ID for hybrid identities.",
+          "maxLength": 255,
+          "pattern": "^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$"
+        },
+        "serverNamePrefix": {
+          "type": "string",
+          "description": "Using ServerNamePrefix, FQDN will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$"
+        },
+        "entraIdAkvConfig": {
+          "$ref": "#/definitions/EntraIdAkvConfigPatch",
+          "description": "Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
+        }
+      }
+    },
     "ExportPolicyRule": {
       "type": "object",
       "description": "Volume Export Policy Rule",
@@ -17709,71 +17838,6 @@
         }
       }
     },
-    "LdapConfigurationPatch": {
-      "type": "object",
-      "description": "LDAP configuration for PATCH operations (no default values)",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "Name of the LDAP configuration domain",
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
-        },
-        "ldapServers": {
-          "type": "array",
-          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ldapOverTLS": {
-          "type": "boolean",
-          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
-        },
-        "serverCACertificate": {
-          "type": "string",
-          "format": "password",
-          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
-          "minLength": 1,
-          "maxLength": 10240,
-          "x-ms-secret": true
-        },
-        "certificateCNHost": {
-          "type": "string",
-          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
-          "x-nullable": true
-        },
-        "dns": {
-          "type": "array",
-          "description": "List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        },
-        "ldapPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number for LDAP communication.",
-          "minimum": 1,
-          "maximum": 65535
-        },
-        "userDn": {
-          "type": "string",
-          "description": "This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.",
-          "maxLength": 255
-        },
-        "groupDn": {
-          "type": "string",
-          "description": "This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.",
-          "maxLength": 255
-        },
-        "netGroupDn": {
-          "type": "string",
-          "description": "This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.",
-          "maxLength": 255
-        }
-      }
-    },
     "LdapSearchScopeOpt": {
       "type": "object",
       "description": "LDAP search scope",
@@ -18212,7 +18276,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/AccountPropertiesPatch",
+          "$ref": "#/definitions/AccountPatchProperties",
           "description": "NetApp Account properties",
           "x-ms-client-flatten": true
         },
