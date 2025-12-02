@@ -54,6 +54,12 @@ model AccountProperties {
   activeDirectories?: ActiveDirectory[];
 
   /**
+   * Entra ID configuration for the account.
+   */
+  @added(Versions.v2025_12_15_preview)
+  entraIdConfig?: EntraIdConfig;
+
+  /**
    * Encryption settings
    */
   encryption?: AccountEncryption;
@@ -94,42 +100,64 @@ model AccountProperties {
 }
 
 /**
- * NetApp account properties for PATCH operations
+ * Entra ID configuration for the account.
  */
 @added(Versions.v2025_12_15_preview)
-model AccountPropertiesPatch {
+model EntraIdConfig {
   /**
-   * Active Directories
+   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
    */
-  @identifiers(#["activeDirectoryId"])
-  activeDirectories?: ActiveDirectory[];
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  applicationId: string;
 
   /**
-   * Encryption settings
+   * Domain of the Active directory synced to Entra ID for hybrid identities.
    */
-  encryption?: AccountEncryption;
+  @maxLength(255)
+  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
+  domain: string;
 
   /**
-   * Shows the status of disableShowmount for all volumes under the subscription, null equals false
+   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
    */
-  disableShowmount?: boolean;
+  @minLength(1)
+  @maxLength(10)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
+  serverNamePrefix: string;
 
   /**
-   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  nfsV4IDDomain?: VfsV4IDDomain | null;
+  entraIdAkvConfig?: EntraIdAkvConfig;
+}
+
+/**
+ * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdAkvConfig {
+  /**
+   * The Azure Key Vault URI where the Entra ID credentials are stored.
+   */
+  azureKeyVaultUri: url;
 
   /**
-   * MultiAD Status for the account
+   * The name of the certificate in Azure Key Vault.
    */
-  multiAdStatus?: MultiAdStatus;
+  @minLength(1)
+  @maxLength(127)
+  certificateName: string;
 
   /**
-   * LDAP Configuration for the account.
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
    */
-  ldapConfiguration?: LdapConfigurationPatch;
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -140,7 +168,6 @@ model AccountPropertiesPatch {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model LdapConfiguration {
@@ -545,6 +572,100 @@ model EncryptionIdentity {
 }
 
 /**
+ * Entra ID Patch configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdConfigPatch {
+  /**
+   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
+   */
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  applicationId?: string;
+
+  /**
+   * Domain of the Active directory synced to Entra ID for hybrid identities.
+   */
+  @maxLength(255)
+  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
+  domain?: string;
+
+  /**
+   * Using ServerNamePrefix, FQDN will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   */
+  @minLength(1)
+  @maxLength(10)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
+  serverNamePrefix?: string;
+
+  /**
+   * Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   */
+  entraIdAkvConfig?: EntraIdAkvConfigPatch;
+}
+
+/**
+ * Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdAkvConfigPatch {
+  /**
+   * The Azure Key Vault URI where the Entra ID credentials are stored.
+   */
+  azureKeyVaultUri?: url;
+
+  /**
+   * The name of the certificate in Azure Key Vault.
+   */
+  @minLength(1)
+  @maxLength(127)
+  certificateName?: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * NetApp account properties for patch operations
+ */
+@added(Versions.v2025_12_15_preview)
+model AccountPatchProperties {
+  /**
+   * Active Directories
+   */
+  @identifiers(#["activeDirectoryId"])
+  activeDirectories?: ActiveDirectory[];
+
+  /**
+   * Entra ID configuration for the account.
+   */
+  entraIdConfig?: EntraIdConfigPatch;
+
+  /**
+   * Encryption settings
+   */
+  encryption?: AccountEncryption;
+
+  /**
+   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp Accounts in the subscription and region and only affect non ldap NFSv4 volumes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  nfsV4IDDomain?: VfsV4IDDomain;
+
+  /**
+   * LDAP Configuration for the account.
+   */
+  ldapConfiguration?: LdapConfiguration;
+}
+
+/**
  * NetApp account patch resource
  */
 model NetAppAccountPatch {
@@ -581,7 +702,7 @@ model NetAppAccountPatch {
    * NetApp Account properties
    */
   @typeChangedFrom(Versions.v2025_12_15_preview, AccountProperties)
-  properties?: AccountPropertiesPatch;
+  properties?: AccountPatchProperties;
 
   /**
    * The identity used for the resource.
