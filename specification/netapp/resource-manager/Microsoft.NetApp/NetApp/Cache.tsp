@@ -286,7 +286,6 @@ model PeeringPassphrases {
    * Warnings that are critical for the cluster peering and vserver peering processes.
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2025_12_01)
   @visibility(Lifecycle.Read)
   criticalWarning: string;
 }
@@ -564,7 +563,6 @@ union CacheProvisioningState {
  * Confirmation parameter to acknowledge running a disruptive operation on the cache.
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2025_12_01)
 union EnableConfirmRunningDisruptiveOperationState {
   string,
 
@@ -583,7 +581,6 @@ union EnableConfirmRunningDisruptiveOperationState {
  * Break file locks request
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2025_12_01)
 model CacheBreakFileLocksRequest {
   /**
    * The IP address of the client whose file locks should be broken
@@ -662,7 +659,6 @@ interface Caches {
    * Resets the CIFS password for the cache
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2025_12_01)
   resetCifsPassword is ArmResourceActionNoResponseContentAsync<
     Cache,
     void,
@@ -673,7 +669,6 @@ interface Caches {
    * Break all the file locks on a cache
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2025_12_01)
   breakFileLocks is ArmResourceActionNoResponseContentAsync<
     Cache,
     CacheBreakFileLocksRequest,
