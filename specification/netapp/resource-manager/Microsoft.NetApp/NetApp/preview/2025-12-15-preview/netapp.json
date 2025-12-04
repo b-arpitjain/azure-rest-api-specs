@@ -6468,6 +6468,89 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/breakFileLocks": {
+      "post": {
+        "operationId": "Caches_BreakFileLocks",
+        "tags": [
+          "Caches"
+        ],
+        "description": "Break all the file locks on a cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the capacity pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "description": "The name of the cache resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CacheBreakFileLocksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_BreakFileLocks": {
+            "$ref": "./examples/Caches_BreakFileLocks.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/listPeeringPassphrases": {
       "post": {
         "operationId": "Caches_ListPeeringPassphrases",
@@ -6621,6 +6704,80 @@
         "x-ms-examples": {
           "Caches_PoolChange": {
             "$ref": "./examples/Caches_PoolChange.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/resetCifsPassword": {
+      "post": {
+        "operationId": "Caches_ResetCifsPassword",
+        "tags": [
+          "Caches"
+        ],
+        "description": "Resets the CIFS password for the cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the capacity pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "description": "The name of the cache resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ResetCifsPassword": {
+            "$ref": "./examples/Caches_ResetCifsPassword.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14106,6 +14263,21 @@
         }
       ]
     },
+    "CacheBreakFileLocksRequest": {
+      "type": "object",
+      "description": "Break file locks request",
+      "properties": {
+        "clientIp": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The IP address of the client whose file locks should be broken",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        },
+        "confirmRunningDisruptiveOperation": {
+          "$ref": "#/definitions/EnableConfirmRunningDisruptiveOperationState",
+          "description": "Break File locks could be a disruptive operation for application as locks on the cache will be broken, to proceed, set to \"True\"."
+        }
+      }
+    },
     "CacheLifeCycleState": {
       "type": "string",
       "description": "Azure NetApp Files Cache lifecycle management",
@@ -16938,6 +17110,30 @@
         }
       }
     },
+    "EnableConfirmRunningDisruptiveOperationState": {
+      "type": "string",
+      "description": "Confirmation parameter to acknowledge running a disruptive operation on the cache.",
+      "enum": [
+        "False",
+        "True"
+      ],
+      "x-ms-enum": {
+        "name": "EnableConfirmRunningDisruptiveOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "False",
+            "value": "False",
+            "description": "User has not confirmed running the disruptive operation"
+          },
+          {
+            "name": "True",
+            "value": "True",
+            "description": "User has confirmed running the disruptive operation"
+          }
+        ]
+      }
+    },
     "EnableWriteBackState": {
       "type": "string",
       "description": "Flag indicating whether writeback is enabled for the cache.",
@@ -18447,12 +18643,18 @@
         "vserverPeeringCommand": {
           "type": "string",
           "description": "The vserver peering command."
+        },
+        "criticalWarning": {
+          "type": "string",
+          "description": "Warnings that are critical for the cluster peering and vserver peering processes.",
+          "readOnly": true
         }
       },
       "required": [
         "clusterPeeringCommand",
         "clusterPeeringPassphrase",
-        "vserverPeeringCommand"
+        "vserverPeeringCommand",
+        "criticalWarning"
       ]
     },
     "PlacementKeyValuePairs": {

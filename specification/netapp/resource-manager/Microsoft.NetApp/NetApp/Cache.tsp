@@ -281,6 +281,14 @@ model PeeringPassphrases {
    * The vserver peering command.
    */
   vserverPeeringCommand: string;
+
+  /**
+   * Warnings that are critical for the cluster peering and vserver peering processes.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  criticalWarning: string;
 }
 
 /**
@@ -552,6 +560,43 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * Confirmation parameter to acknowledge running a disruptive operation on the cache.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2025_12_01)
+union EnableConfirmRunningDisruptiveOperationState {
+  string,
+
+  /**
+   * User has not confirmed running the disruptive operation
+   */
+  False: "False",
+
+  /**
+   * User has confirmed running the disruptive operation
+   */
+  True: "True",
+}
+
+/**
+ * Break file locks request
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2025_12_01)
+model CacheBreakFileLocksRequest {
+  /**
+   * The IP address of the client whose file locks should be broken
+   */
+  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+  clientIp?: Azure.Core.ipV4Address;
+
+  /**
+   * Break File locks could be a disruptive operation for application as locks on the cache will be broken, to proceed, set to "True".
+   */
+  confirmRunningDisruptiveOperation?: EnableConfirmRunningDisruptiveOperationState;
+}
+
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
@@ -612,10 +657,36 @@ interface Caches {
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Resets the CIFS password for the cache
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2025_12_01)
+  resetCifsPassword is ArmResourceActionNoResponseContentAsync<
+    Cache,
+    void,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void>
+  >;
+
+  /**
+   * Break all the file locks on a cache
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2025_12_01)
+  breakFileLocks is ArmResourceActionNoResponseContentAsync<
+    Cache,
+    CacheBreakFileLocksRequest,
+    OptionalRequestBody = true,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
+);
+@@doc(Caches.breakFileLocks::parameters.body,
+  "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation."
 );
 
 @@maxLength(Cache.name, 64);

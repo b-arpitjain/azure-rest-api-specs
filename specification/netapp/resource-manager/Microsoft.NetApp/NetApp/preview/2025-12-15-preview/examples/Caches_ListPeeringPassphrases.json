@@ -12,7 +12,8 @@
       "body": {
         "clusterPeeringCommand": "cluster peer create -ipspace replication -encryption-protocol-proposed tls-psk -passphrase passphraseString -peer-addrs 192.0.2.10,192.0.2.11,192.0.2.12,192.0.2.13,192.0.2.14,192.0.2.15",
         "clusterPeeringPassphrase": "f@&@B^#r!",
-        "vserverPeeringCommand": "vserver peer accept -vserver {onPremiseSVMName} -peer-vserver {anfSVMName}"
+        "vserverPeeringCommand": "vserver peer accept -vserver {onPremiseSVMName} -peer-vserver {anfSVMName}",
+        "criticalWarning": "The cluster peering passphrase remains valid for 30 minutes. Please establish the cluster peer on the origin cluster before the passphrase expires. Once the cacheState transitions to VserverPeeringOfferSent, accept the Vserver peer on the origin cluster within 12 minutes. Completing all peering operations promptly will help ensure that subsequent Create/Update/Delete operations on any Microsoft.NetApp resources are not delayed."
       }
     }
   },
