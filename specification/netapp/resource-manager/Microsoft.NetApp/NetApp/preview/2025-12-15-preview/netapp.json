@@ -17162,7 +17162,7 @@
     },
     "EntraIdAkvConfigPatch": {
       "type": "object",
-      "description": "Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
       "properties": {
         "azureKeyVaultUri": {
           "type": "string",
@@ -17243,14 +17243,14 @@
         },
         "serverNamePrefix": {
           "type": "string",
-          "description": "Using ServerNamePrefix, FQDN will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
+          "description": "Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
           "minLength": 1,
           "maxLength": 10,
           "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$"
         },
         "entraIdAkvConfig": {
           "$ref": "#/definitions/EntraIdAkvConfigPatch",
-          "description": "Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
+          "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
         }
       }
     },
