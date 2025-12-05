@@ -592,7 +592,7 @@ model EntraIdConfigPatch {
   domain?: string;
 
   /**
-   * Using ServerNamePrefix, FQDN will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
    */
   @minLength(1)
   @maxLength(10)
@@ -600,13 +600,13 @@ model EntraIdConfigPatch {
   serverNamePrefix?: string;
 
   /**
-   * Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
    */
   entraIdAkvConfig?: EntraIdAkvConfigPatch;
 }
 
 /**
- * Using AKV config, certificate will be fetched, which will contain privateKey & publicCertificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
  */
 @added(Versions.v2025_12_15_preview)
 model EntraIdAkvConfigPatch {
