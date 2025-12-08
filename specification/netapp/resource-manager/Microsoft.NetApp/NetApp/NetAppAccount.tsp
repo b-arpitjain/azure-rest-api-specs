@@ -54,12 +54,6 @@ model AccountProperties {
   activeDirectories?: ActiveDirectory[];
 
   /**
-   * Entra ID configuration for the account.
-   */
-  @added(Versions.v2025_12_15_preview)
-  entraIdConfig?: EntraIdConfig;
-
-  /**
    * Encryption settings
    */
   encryption?: AccountEncryption;
@@ -95,68 +89,47 @@ model AccountProperties {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @added(Versions.v2025_12_15_preview)
   ldapConfiguration?: LdapConfiguration;
 }
 
 /**
- * Entra ID configuration for the account.
+ * NetApp account properties for PATCH operations
  */
 @added(Versions.v2025_12_15_preview)
-model EntraIdConfig {
+model AccountPropertiesPatch {
   /**
-   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
+   * Active Directories
    */
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-  applicationId: string;
+  @identifiers(#["activeDirectoryId"])
+  activeDirectories?: ActiveDirectory[];
 
   /**
-   * Domain of the Active directory synced to Entra ID for hybrid identities.
+   * Encryption settings
    */
-  @maxLength(255)
-  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
-  domain: string;
+  encryption?: AccountEncryption;
 
   /**
-   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   * Shows the status of disableShowmount for all volumes under the subscription, null equals false
    */
-  @minLength(1)
-  @maxLength(10)
-  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
-  serverNamePrefix: string;
+  disableShowmount?: boolean;
 
   /**
-   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
    */
-  entraIdAkvConfig?: EntraIdAkvConfig;
-}
-
-/**
- * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
- */
-@added(Versions.v2025_12_15_preview)
-model EntraIdAkvConfig {
-  /**
-   * The Azure Key Vault URI where the Entra ID credentials are stored.
-   */
-  azureKeyVaultUri: url;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  nfsV4IDDomain?: VfsV4IDDomain | null;
 
   /**
-   * The name of the certificate in Azure Key Vault.
+   * MultiAD Status for the account
    */
-  @minLength(1)
-  @maxLength(127)
-  certificateName: string;
+  multiAdStatus?: MultiAdStatus;
 
   /**
-   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   * LDAP Configuration for the account.
    */
-  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
+  ldapConfiguration?: LdapConfigurationPatch;
 }
 
 /**
@@ -205,6 +178,123 @@ model LdapConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string | null;
+
+  /**
+   * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
+   */
+  @added(Versions.v2025_12_15_preview)
+  dns?: Azure.Core.ipV4Address[];
+
+  /**
+   * Port number for LDAP communication. Default is 389 for LDAP.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @minValue(1)
+  @maxValue(65535)
+  ldapPort?: int32 = 389;
+
+  /**
+   * This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  userDn?: string;
+
+  /**
+   * This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  groupDn?: string;
+
+  /**
+   * This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  netGroupDn?: string;
+}
+
+/**
+ * LDAP configuration for PATCH operations (no default values)
+ */
+@added(Versions.v2025_12_15_preview)
+model LdapConfigurationPatch {
+  /**
+   * Name of the LDAP configuration domain
+   */
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+  domain?: string;
+
+  /**
+   * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
+   */
+  ldapServers?: string[];
+
+  /**
+   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  ldapOverTLS?: boolean;
+
+  /**
+   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(10240)
+  @minLength(1)
+  @secret
+  serverCACertificate?: string;
+
+  /**
+   * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @maxLength(255)
+  certificateCNHost?: string | null;
+
+  /**
+   * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
+   */
+  @added(Versions.v2025_12_15_preview)
+  dns?: Azure.Core.ipV4Address[];
+
+  /**
+   * Port number for LDAP communication.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @minValue(1)
+  @maxValue(65535)
+  ldapPort?: int32;
+
+  /**
+   * This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  userDn?: string;
+
+  /**
+   * This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  groupDn?: string;
+
+  /**
+   * This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @maxLength(255)
+  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
+  netGroupDn?: string;
 }
 
 @maxLength(255)
@@ -455,100 +545,6 @@ model EncryptionIdentity {
 }
 
 /**
- * Entra ID Patch configuration for the account.
- */
-@added(Versions.v2025_12_15_preview)
-model EntraIdConfigPatch {
-  /**
-   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
-   */
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-  applicationId?: string;
-
-  /**
-   * Domain of the Active directory synced to Entra ID for hybrid identities.
-   */
-  @maxLength(255)
-  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
-  domain?: string;
-
-  /**
-   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
-   */
-  @minLength(1)
-  @maxLength(10)
-  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
-  serverNamePrefix?: string;
-
-  /**
-   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
-   */
-  entraIdAkvConfig?: EntraIdAkvConfigPatch;
-}
-
-/**
- * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
- */
-@added(Versions.v2025_12_15_preview)
-model EntraIdAkvConfigPatch {
-  /**
-   * The Azure Key Vault URI where the Entra ID credentials are stored.
-   */
-  azureKeyVaultUri?: url;
-
-  /**
-   * The name of the certificate in Azure Key Vault.
-   */
-  @minLength(1)
-  @maxLength(127)
-  certificateName?: string;
-
-  /**
-   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
-   */
-  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-}
-
-/**
- * NetApp account properties for patch operations
- */
-@added(Versions.v2025_12_15_preview)
-model AccountPatchProperties {
-  /**
-   * Active Directories
-   */
-  @identifiers(#["activeDirectoryId"])
-  activeDirectories?: ActiveDirectory[];
-
-  /**
-   * Entra ID configuration for the account.
-   */
-  entraIdConfig?: EntraIdConfigPatch;
-
-  /**
-   * Encryption settings
-   */
-  encryption?: AccountEncryption;
-
-  /**
-   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp Accounts in the subscription and region and only affect non ldap NFSv4 volumes.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  nfsV4IDDomain?: VfsV4IDDomain;
-
-  /**
-   * LDAP Configuration for the account.
-   */
-  ldapConfiguration?: LdapConfiguration;
-}
-
-/**
  * NetApp account patch resource
  */
 model NetAppAccountPatch {
@@ -585,7 +581,7 @@ model NetAppAccountPatch {
    * NetApp Account properties
    */
   @typeChangedFrom(Versions.v2025_12_15_preview, AccountProperties)
-  properties?: AccountPatchProperties;
+  properties?: AccountPropertiesPatch;
 
   /**
    * The identity used for the resource.
