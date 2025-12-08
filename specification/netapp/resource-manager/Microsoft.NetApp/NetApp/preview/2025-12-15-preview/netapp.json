@@ -4404,6 +4404,9 @@
           "Accounts_CreateOrUpdate": {
             "$ref": "./examples/Accounts_CreateOrUpdate.json"
           },
+          "Accounts_CreateOrUpdateEntraIdConfig": {
+            "$ref": "./examples/Accounts_CreateOrUpdateEntraIdConfig.json"
+          },
           "Accounts_CreateOrUpdateLdapConfig": {
             "$ref": "./examples/Accounts_CreateOrUpdateLdapConfig.json"
           },
@@ -12762,6 +12765,10 @@
             "activeDirectoryId"
           ]
         },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfig",
+          "description": "Entra ID configuration for the account."
+        },
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
           "description": "Encryption settings"
@@ -12801,6 +12808,10 @@
           "x-ms-identifiers": [
             "activeDirectoryId"
           ]
+        },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfigPatch",
+          "description": "Entra ID configuration for the account."
         },
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
@@ -17123,6 +17134,133 @@
             "value": "dst"
           }
         ]
+      }
+    },
+    "EntraIdAkvConfig": {
+      "type": "object",
+      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Entra ID credentials are stored."
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "The name of the certificate in Azure Key Vault.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "azureKeyVaultUri",
+        "certificateName"
+      ]
+    },
+    "EntraIdAkvConfigPatch": {
+      "type": "object",
+      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Entra ID credentials are stored."
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "The name of the certificate in Azure Key Vault.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "EntraIdConfig": {
+      "type": "object",
+      "description": "Entra ID configuration for the account.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the Active directory synced to Entra ID for hybrid identities.",
+          "maxLength": 255,
+          "pattern": "^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$"
+        },
+        "serverNamePrefix": {
+          "type": "string",
+          "description": "Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$"
+        },
+        "entraIdAkvConfig": {
+          "$ref": "#/definitions/EntraIdAkvConfig",
+          "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
+        }
+      },
+      "required": [
+        "applicationId",
+        "domain",
+        "serverNamePrefix"
+      ]
+    },
+    "EntraIdConfigPatch": {
+      "type": "object",
+      "description": "Entra ID Patch configuration for the account.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the Active directory synced to Entra ID for hybrid identities.",
+          "maxLength": 255,
+          "pattern": "^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$"
+        },
+        "serverNamePrefix": {
+          "type": "string",
+          "description": "Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$"
+        },
+        "entraIdAkvConfig": {
+          "$ref": "#/definitions/EntraIdAkvConfigPatch",
+          "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication."
+        }
       }
     },
     "ExportPolicyRule": {

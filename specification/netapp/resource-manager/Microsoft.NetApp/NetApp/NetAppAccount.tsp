@@ -54,6 +54,12 @@ model AccountProperties {
   activeDirectories?: ActiveDirectory[];
 
   /**
+   * Entra ID configuration for the account.
+   */
+  @added(Versions.v2025_12_15_preview)
+  entraIdConfig?: EntraIdConfig;
+
+  /**
    * Encryption settings
    */
   encryption?: AccountEncryption;
@@ -94,6 +100,67 @@ model AccountProperties {
 }
 
 /**
+ * Entra ID configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdConfig {
+  /**
+   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
+   */
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  applicationId: string;
+
+  /**
+   * Domain of the Active directory synced to Entra ID for hybrid identities.
+   */
+  @maxLength(255)
+  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
+  domain: string;
+
+  /**
+   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   */
+  @minLength(1)
+  @maxLength(10)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
+  serverNamePrefix: string;
+
+  /**
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   */
+  entraIdAkvConfig?: EntraIdAkvConfig;
+}
+
+/**
+ * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdAkvConfig {
+  /**
+   * The Azure Key Vault URI where the Entra ID credentials are stored.
+   */
+  azureKeyVaultUri: url;
+
+  /**
+   * The name of the certificate in Azure Key Vault.
+   */
+  @minLength(1)
+  @maxLength(127)
+  certificateName: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
  * NetApp account properties for PATCH operations
  */
 @added(Versions.v2025_12_15_preview)
@@ -103,6 +170,11 @@ model AccountPropertiesPatch {
    */
   @identifiers(#["activeDirectoryId"])
   activeDirectories?: ActiveDirectory[];
+
+  /**
+   * Entra ID configuration for the account.
+   */
+  entraIdConfig?: EntraIdConfigPatch;
 
   /**
    * Encryption settings
@@ -542,6 +614,67 @@ model EncryptionIdentity {
    * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
    */
   federatedClientId?: string;
+}
+
+/**
+ * Entra ID Patch configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdConfigPatch {
+  /**
+   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
+   */
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  applicationId?: string;
+
+  /**
+   * Domain of the Active directory synced to Entra ID for hybrid identities.
+   */
+  @maxLength(255)
+  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
+  domain?: string;
+
+  /**
+   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   */
+  @minLength(1)
+  @maxLength(10)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
+  serverNamePrefix?: string;
+
+  /**
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   */
+  entraIdAkvConfig?: EntraIdAkvConfigPatch;
+}
+
+/**
+ * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ */
+@added(Versions.v2025_12_15_preview)
+model EntraIdAkvConfigPatch {
+  /**
+   * The Azure Key Vault URI where the Entra ID credentials are stored.
+   */
+  azureKeyVaultUri?: url;
+
+  /**
+   * The name of the certificate in Azure Key Vault.
+   */
+  @minLength(1)
+  @maxLength(127)
+  certificateName?: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
