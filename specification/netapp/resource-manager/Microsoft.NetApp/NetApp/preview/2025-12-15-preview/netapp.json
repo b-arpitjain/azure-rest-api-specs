@@ -6718,9 +6718,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/resetCifsPassword": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/resetSmbPassword": {
       "post": {
-        "operationId": "Caches_ResetCifsPassword",
+        "operationId": "Caches_ResetSmbPassword",
         "tags": [
           "Caches"
         ],
@@ -6782,8 +6782,8 @@
           }
         },
         "x-ms-examples": {
-          "Caches_ResetCifsPassword": {
-            "$ref": "./examples/Caches_ResetCifsPassword.json"
+          "Caches_ResetSmbPassword": {
+            "$ref": "./examples/Caches_ResetSmbPassword.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14322,10 +14322,6 @@
           "$ref": "#/definitions/Azure.Core.ipV4Address",
           "description": "The IP address of the client whose file locks should be broken",
           "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-        },
-        "confirmRunningDisruptiveOperation": {
-          "$ref": "#/definitions/EnableConfirmRunningDisruptiveOperationState",
-          "description": "Break File locks could be a disruptive operation for application as locks on the cache will be broken, to proceed, set to \"True\"."
         }
       }
     },
@@ -14633,6 +14629,11 @@
             ]
           },
           "readOnly": true
+        },
+        "unixPermissions": {
+          "type": "string",
+          "description": "UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.\nUnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.",
+          "pattern": "^[0-7]{4}$"
         }
       },
       "required": [
@@ -14766,6 +14767,11 @@
         "writeBack": {
           "$ref": "#/definitions/EnableWriteBackState",
           "description": "Flag indicating whether writeback is enabled for the cache."
+        },
+        "unixPermissions": {
+          "type": "string",
+          "description": "UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.\nUnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.",
+          "pattern": "^[0-7]{4}$"
         }
       }
     },
@@ -17161,30 +17167,6 @@
         }
       }
     },
-    "EnableConfirmRunningDisruptiveOperationState": {
-      "type": "string",
-      "description": "Confirmation parameter to acknowledge running a disruptive operation on the cache.",
-      "enum": [
-        "False",
-        "True"
-      ],
-      "x-ms-enum": {
-        "name": "EnableConfirmRunningDisruptiveOperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "False",
-            "value": "False",
-            "description": "User has not confirmed running the disruptive operation"
-          },
-          {
-            "name": "True",
-            "value": "True",
-            "description": "User has confirmed running the disruptive operation"
-          }
-        ]
-      }
-    },
     "EnableWriteBackState": {
       "type": "string",
       "description": "Flag indicating whether writeback is enabled for the cache.",
@@ -18926,8 +18908,7 @@
       "required": [
         "clusterPeeringCommand",
         "clusterPeeringPassphrase",
-        "vserverPeeringCommand",
-        "criticalWarning"
+        "vserverPeeringCommand"
       ]
     },
     "PlacementKeyValuePairs": {

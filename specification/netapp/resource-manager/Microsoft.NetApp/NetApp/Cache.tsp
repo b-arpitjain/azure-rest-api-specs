@@ -206,6 +206,14 @@ model CacheProperties {
   @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   fileAccessLogs?: FileAccessLogs = FileAccessLogs.Disabled;
+
+  /**
+   * UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.
+   * UnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @pattern("^[0-7]{4}$")
+  unixPermissions?: string;
 }
 
 /**
@@ -287,7 +295,7 @@ model PeeringPassphrases {
    */
   @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
-  criticalWarning: string;
+  criticalWarning?: string;
 }
 
 /**
@@ -560,24 +568,6 @@ union CacheProvisioningState {
 }
 
 /**
- * Confirmation parameter to acknowledge running a disruptive operation on the cache.
- */
-@added(Versions.v2025_12_15_preview)
-union EnableConfirmRunningDisruptiveOperationState {
-  string,
-
-  /**
-   * User has not confirmed running the disruptive operation
-   */
-  False: "False",
-
-  /**
-   * User has confirmed running the disruptive operation
-   */
-  True: "True",
-}
-
-/**
  * Break file locks request
  */
 @added(Versions.v2025_12_15_preview)
@@ -587,11 +577,6 @@ model CacheBreakFileLocksRequest {
    */
   @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   clientIp?: Azure.Core.ipV4Address;
-
-  /**
-   * Break File locks could be a disruptive operation for application as locks on the cache will be broken, to proceed, set to "True".
-   */
-  confirmRunningDisruptiveOperation?: EnableConfirmRunningDisruptiveOperationState;
 }
 
 @armResourceOperations
@@ -659,7 +644,7 @@ interface Caches {
    * Resets the CIFS password for the cache
    */
   @added(Versions.v2025_12_15_preview)
-  resetCifsPassword is ArmResourceActionNoResponseContentAsync<
+  resetSmbPassword is ArmResourceActionNoResponseContentAsync<
     Cache,
     void,
     LroHeaders = ArmLroLocationHeader<FinalResult = void>
