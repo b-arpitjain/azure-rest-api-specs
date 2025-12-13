@@ -6480,7 +6480,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Break all the file locks on a cache",
+        "description": "Break all the file locks on a cache for a given client IP",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -6724,7 +6724,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Resets the CIFS password for the cache",
+        "description": "Resets the SMB password for the cache",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -14320,8 +14320,7 @@
       "properties": {
         "clientIp": {
           "$ref": "#/definitions/Azure.Core.ipV4Address",
-          "description": "The IP address of the client whose file locks should be broken",
-          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          "description": "The IP address of the client whose file locks should be broken"
         }
       }
     },

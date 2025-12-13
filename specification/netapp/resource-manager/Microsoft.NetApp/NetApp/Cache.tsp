@@ -575,7 +575,6 @@ model CacheBreakFileLocksRequest {
   /**
    * The IP address of the client whose file locks should be broken
    */
-  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   clientIp?: Azure.Core.ipV4Address;
 }
 
@@ -641,7 +640,7 @@ interface Caches {
   >;
 
   /**
-   * Resets the CIFS password for the cache
+   * Resets the SMB password for the cache
    */
   @added(Versions.v2025_12_15_preview)
   resetSmbPassword is ArmResourceActionNoResponseContentAsync<
@@ -651,7 +650,7 @@ interface Caches {
   >;
 
   /**
-   * Break all the file locks on a cache
+   * Break all the file locks on a cache for a given client IP
    */
   @added(Versions.v2025_12_15_preview)
   breakFileLocks is ArmResourceActionNoResponseContentAsync<
