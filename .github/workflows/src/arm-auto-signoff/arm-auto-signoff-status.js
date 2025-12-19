@@ -1,8 +1,9 @@
-import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
-import { equals } from "../../shared/src/set.js";
-import { byDate, invert } from "../../shared/src/sort.js";
-import { extractInputs } from "./context.js";
-import { LabelAction } from "./label.js";
+import { inspect } from "util";
+import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { equals } from "../../../shared/src/set.js";
+import { byDate, invert } from "../../../shared/src/sort.js";
+import { extractInputs } from "../context.js";
+import { LabelAction } from "../label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -69,7 +70,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     ? labelActions[LabelAction.Remove]
     : labelActions[LabelAction.None];
 
-  core.info(`Labels: ${labelNames}`);
+  core.info(`Labels: ${inspect(labelNames)}`);
 
   // permissions: { actions: read }
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
@@ -85,7 +86,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental TypeSpec";
+  const wfName = "ARM Auto SignOff - Analyze Code";
   const incrementalTspRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
@@ -125,7 +126,9 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
         // Continue checking other requirements
       } else {
         // If workflow succeeded, it should have one workflow or the other
-        throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+        throw new Error(
+          `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`,
+        );
       }
     } else {
       core.info(`Workflow '${wfName}' is still in-progress: status='${run.status}'`);
@@ -181,7 +184,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       (matchingStatus.state === CommitStatusState.ERROR ||
         matchingStatus.state === CommitStatusState.FAILURE)
     ) {
-      core.info(`Status '${matchingStatus}' did not succeed`);
+      core.info(`Status '${matchingStatus.context}' did not succeed`);
       return removeAction;
     }
 
