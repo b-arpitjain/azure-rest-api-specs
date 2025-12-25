@@ -208,8 +208,7 @@ model CacheProperties {
   fileAccessLogs?: FileAccessLogs = FileAccessLogs.Disabled;
 
   /**
-   * UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.
-   * UnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.
+   * Unix permissions string in octal format (e.g., "0777").
    */
   @added(Versions.v2025_12_15_preview)
   @pattern("^[0-7]{4}$")
@@ -650,7 +649,7 @@ interface Caches {
   >;
 
   /**
-   * Break all the file locks on a cache for a given client IP
+   * Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.
    */
   @added(Versions.v2025_12_15_preview)
   breakFileLocks is ArmResourceActionNoResponseContentAsync<

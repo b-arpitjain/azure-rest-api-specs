@@ -6480,7 +6480,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Break all the file locks on a cache for a given client IP",
+        "description": "Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -14631,7 +14631,7 @@
         },
         "unixPermissions": {
           "type": "string",
-          "description": "UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.\nUnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.",
+          "description": "Unix permissions string in octal format (e.g., \"0777\").",
           "pattern": "^[0-7]{4}$"
         }
       },
@@ -14769,7 +14769,7 @@
         },
         "unixPermissions": {
           "type": "string",
-          "description": "UnixPermissions can only be changed by the user via update and patch APIs and must not be overridden internally.\nUnixPermissions cannot be set during cache volume create because they are inherited from the on-prem origin volume.",
+          "description": "Unix permissions string in octal format (e.g., \"0777\").",
           "pattern": "^[0-7]{4}$"
         }
       }
