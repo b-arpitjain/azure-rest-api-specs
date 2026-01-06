@@ -6531,7 +6531,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -6774,7 +6777,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",

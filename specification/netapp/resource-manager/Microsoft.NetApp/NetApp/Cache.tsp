@@ -645,9 +645,7 @@ interface Caches {
   resetSmbPassword is ArmResourceActionAsync<
     Resource = Cache,
     Request = void,
-    Response = {
-      @body body: void;
-    },
+    Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader,
   >;
@@ -660,9 +658,7 @@ interface Caches {
     Resource = Cache,
     Request = CacheBreakFileLocksRequest,
     OptionalRequestBody = true,
-    Response = {
-      @body body: void;
-    },
+    Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader,
   >;
