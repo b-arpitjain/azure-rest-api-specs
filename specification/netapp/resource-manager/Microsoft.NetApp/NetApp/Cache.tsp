@@ -642,21 +642,29 @@ interface Caches {
    * Resets the SMB password for the cache
    */
   @added(Versions.v2025_12_15_preview)
-  resetSmbPassword is ArmResourceActionNoResponseContentAsync<
-    Cache,
-    void,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void>
+  resetSmbPassword is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = void,
+    Response = {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
   >;
 
   /**
    * Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.
    */
   @added(Versions.v2025_12_15_preview)
-  breakFileLocks is ArmResourceActionNoResponseContentAsync<
-    Cache,
-    CacheBreakFileLocksRequest,
+  breakFileLocks is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = CacheBreakFileLocksRequest,
     OptionalRequestBody = true,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void>
+    Response = {
+      @body body: void;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
   >;
 }
 
