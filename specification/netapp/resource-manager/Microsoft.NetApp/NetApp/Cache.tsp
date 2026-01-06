@@ -647,7 +647,7 @@ interface Caches {
     Request = void,
     Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -660,7 +660,7 @@ interface Caches {
     OptionalRequestBody = true,
     Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
