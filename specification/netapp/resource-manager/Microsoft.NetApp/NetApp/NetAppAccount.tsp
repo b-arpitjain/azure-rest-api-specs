@@ -23,7 +23,7 @@ model NetAppAccount
     SegmentName = "netAppAccounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 

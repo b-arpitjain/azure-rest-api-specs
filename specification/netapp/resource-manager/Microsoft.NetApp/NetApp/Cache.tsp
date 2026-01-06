@@ -26,7 +26,7 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
     SegmentName = "caches",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 

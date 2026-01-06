@@ -22,7 +22,7 @@ model SnapshotPolicy
     SegmentName = "snapshotPolicies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /**

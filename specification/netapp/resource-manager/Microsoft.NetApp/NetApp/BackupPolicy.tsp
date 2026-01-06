@@ -22,7 +22,7 @@ model BackupPolicy
     SegmentName = "backupPolicies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /**
