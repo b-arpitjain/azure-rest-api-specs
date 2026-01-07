@@ -24,7 +24,7 @@ model Volume is Azure.ResourceManager.TrackedResource<VolumeProperties, false> {
     SegmentName = "volumes",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 

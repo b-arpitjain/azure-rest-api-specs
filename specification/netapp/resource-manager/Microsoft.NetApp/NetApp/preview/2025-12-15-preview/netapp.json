@@ -6474,6 +6474,100 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/breakFileLocks": {
+      "post": {
+        "operationId": "Caches_BreakFileLocks",
+        "tags": [
+          "Caches"
+        ],
+        "description": "Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the capacity pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "description": "The name of the cache resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CacheBreakFileLocksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_BreakFileLocks": {
+            "$ref": "./examples/Caches_BreakFileLocks.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/listPeeringPassphrases": {
       "post": {
         "operationId": "Caches_ListPeeringPassphrases",
@@ -6627,6 +6721,91 @@
         "x-ms-examples": {
           "Caches_PoolChange": {
             "$ref": "./examples/Caches_PoolChange.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/resetSmbPassword": {
+      "post": {
+        "operationId": "Caches_ResetSmbPassword",
+        "tags": [
+          "Caches"
+        ],
+        "description": "Resets the SMB password for the cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the capacity pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "description": "The name of the cache resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ResetSmbPassword": {
+            "$ref": "./examples/Caches_ResetSmbPassword.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -12968,9 +13147,9 @@
           "$ref": "#/definitions/ActiveDirectoryConfigProperties",
           "description": "The resource-specific properties for this resource."
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         },
         "identity": {
@@ -13393,9 +13572,9 @@
           "description": "Backup policy Properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -14131,9 +14310,9 @@
           "$ref": "#/definitions/CacheProperties",
           "description": "Cache properties"
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         },
         "zones": {
@@ -14156,6 +14335,16 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "CacheBreakFileLocksRequest": {
+      "type": "object",
+      "description": "Break file locks request",
+      "properties": {
+        "clientIp": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The IP address of the client whose file locks should be broken"
+        }
+      }
     },
     "CacheLifeCycleState": {
       "type": "string",
@@ -14461,6 +14650,11 @@
             ]
           },
           "readOnly": true
+        },
+        "unixPermissions": {
+          "type": "string",
+          "description": "Unix permissions string in octal format (e.g., \"0777\").",
+          "pattern": "^[0-7]{4}$"
         }
       },
       "required": [
@@ -14594,6 +14788,11 @@
         "writeBack": {
           "$ref": "#/definitions/EnableWriteBackState",
           "description": "Flag indicating whether writeback is enabled for the cache."
+        },
+        "unixPermissions": {
+          "type": "string",
+          "description": "Unix permissions string in octal format (e.g., \"0777\").",
+          "pattern": "^[0-7]{4}$"
         }
       }
     },
@@ -14606,9 +14805,9 @@
           "description": "Capacity pool properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -14678,6 +14877,10 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "CertificateCNHost": {
+      "type": "string",
+      "maxLength": 255
     },
     "ChangeKeyVault": {
       "type": "object",
@@ -17811,7 +18014,7 @@
           "x-ms-secret": true
         },
         "certificateCNHost": {
-          "type": "string",
+          "$ref": "#/definitions/CertificateCNHost",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
           "x-nullable": true
         },
@@ -17877,7 +18080,7 @@
           "x-ms-secret": true
         },
         "certificateCNHost": {
-          "type": "string",
+          "$ref": "#/definitions/CertificateCNHost",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
           "x-nullable": true
         },
@@ -18282,9 +18485,9 @@
           "description": "NetApp Account properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         },
         "identity": {
@@ -18720,6 +18923,11 @@
         "vserverPeeringCommand": {
           "type": "string",
           "description": "The vserver peering command."
+        },
+        "criticalWarning": {
+          "type": "string",
+          "description": "Warnings that are critical for the cluster peering and vserver peering processes.",
+          "readOnly": true
         }
       },
       "required": [
@@ -20197,9 +20405,9 @@
           "description": "Snapshot policy Properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -20779,9 +20987,9 @@
           "description": "Volume properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         },
         "zones": {

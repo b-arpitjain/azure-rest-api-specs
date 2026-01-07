@@ -26,7 +26,7 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
     SegmentName = "caches",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...Azure.ResourceManager.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
@@ -206,6 +206,13 @@ model CacheProperties {
   @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   fileAccessLogs?: FileAccessLogs = FileAccessLogs.Disabled;
+
+  /**
+   * Unix permissions string in octal format (e.g., "0777").
+   */
+  @added(Versions.v2025_12_15_preview)
+  @pattern("^[0-7]{4}$")
+  unixPermissions?: string;
 }
 
 /**
@@ -281,6 +288,13 @@ model PeeringPassphrases {
    * The vserver peering command.
    */
   vserverPeeringCommand: string;
+
+  /**
+   * Warnings that are critical for the cluster peering and vserver peering processes.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @visibility(Lifecycle.Read)
+  criticalWarning?: string;
 }
 
 /**
@@ -552,6 +566,17 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * Break file locks request
+ */
+@added(Versions.v2025_12_15_preview)
+model CacheBreakFileLocksRequest {
+  /**
+   * The IP address of the client whose file locks should be broken
+   */
+  clientIp?: Azure.Core.ipV4Address;
+}
+
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
@@ -612,10 +637,38 @@ interface Caches {
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Resets the SMB password for the cache
+   */
+  @added(Versions.v2025_12_15_preview)
+  resetSmbPassword is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = void,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.
+   */
+  @added(Versions.v2025_12_15_preview)
+  breakFileLocks is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = CacheBreakFileLocksRequest,
+    OptionalRequestBody = true,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
+);
+@@doc(Caches.breakFileLocks::parameters.body,
+  "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation."
 );
 
 @@maxLength(Cache.name, 64);
