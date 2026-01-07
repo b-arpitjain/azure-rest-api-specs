@@ -14878,6 +14878,10 @@
         }
       }
     },
+    "CertificateCNHost": {
+      "type": "string",
+      "maxLength": 255
+    },
     "ChangeKeyVault": {
       "type": "object",
       "description": "Change key vault request",
@@ -18010,7 +18014,7 @@
           "x-ms-secret": true
         },
         "certificateCNHost": {
-          "type": "string",
+          "$ref": "#/definitions/CertificateCNHost",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
           "x-nullable": true
         },
@@ -18076,7 +18080,7 @@
           "x-ms-secret": true
         },
         "certificateCNHost": {
-          "type": "string",
+          "$ref": "#/definitions/CertificateCNHost",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
           "x-nullable": true
         },
