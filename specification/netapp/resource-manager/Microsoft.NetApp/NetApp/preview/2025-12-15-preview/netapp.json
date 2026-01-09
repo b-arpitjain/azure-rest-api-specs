@@ -6635,6 +6635,100 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/modifyClusterPeer": {
+      "post": {
+        "operationId": "Caches_ModifyClusterPeer",
+        "tags": [
+          "Caches"
+        ],
+        "description": "Modify the cluster peer addresses for the cache's origin cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the capacity pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "description": "The name of the cache resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModifyClusterPeerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ModifyClusterPeer": {
+            "$ref": "./examples/Caches_ModifyClusterPeer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/caches/{cacheName}/poolChange": {
       "post": {
         "operationId": "Caches_PoolChange",
@@ -14650,11 +14744,6 @@
             ]
           },
           "readOnly": true
-        },
-        "unixPermissions": {
-          "type": "string",
-          "description": "Unix permissions string in octal format (e.g., \"0777\").",
-          "pattern": "^[0-7]{4}$"
         }
       },
       "required": [
@@ -14788,11 +14877,6 @@
         "writeBack": {
           "$ref": "#/definitions/EnableWriteBackState",
           "description": "Flag indicating whether writeback is enabled for the cache."
-        },
-        "unixPermissions": {
-          "type": "string",
-          "description": "Unix permissions string in octal format (e.g., \"0777\").",
-          "pattern": "^[0-7]{4}$"
         }
       }
     },
@@ -18389,6 +18473,23 @@
         ]
       }
     },
+    "ModifyClusterPeerRequest": {
+      "type": "object",
+      "description": "Modify cluster peer request",
+      "properties": {
+        "newPeerAddresses": {
+          "type": "array",
+          "description": "The complete set of peer addresses for the cluster.\nThis array replaces the existing peer addresses. Include all addresses you want to keep, plus any new addresses.\nAny existing addresses not included in this array will be removed from the cluster peer configuration.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "newPeerAddresses"
+      ]
+    },
     "MonthlySchedule": {
       "type": "object",
       "description": "Monthly Schedule properties",
@@ -18874,6 +18975,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "actualPeerAddresses": {
+          "type": "array",
+          "description": "Actual ONTAP Intercluster LIF IP addresses. The modifyClusterPeer operation can be used to update these addresses.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "peerVserverName": {
           "type": "string",
