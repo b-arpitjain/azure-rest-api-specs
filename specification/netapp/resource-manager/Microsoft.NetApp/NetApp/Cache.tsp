@@ -206,13 +206,6 @@ model CacheProperties {
   @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read)
   fileAccessLogs?: FileAccessLogs = FileAccessLogs.Disabled;
-
-  /**
-   * Unix permissions string in octal format (e.g., "0777").
-   */
-  @added(Versions.v2025_12_15_preview)
-  @pattern("^[0-7]{4}$")
-  unixPermissions?: string;
 }
 
 /**
@@ -255,6 +248,13 @@ model OriginClusterInformation {
    */
   @minItems(1)
   peerAddresses: string[];
+
+  /**
+   * Actual ONTAP Intercluster LIF IP addresses. The modifyClusterPeer operation can be used to update these addresses.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @visibility(Lifecycle.Read)
+  actualPeerAddresses?: string[];
 
   /**
    * External Vserver (SVM) name  name of the SVM hosting the origin volume
@@ -577,6 +577,19 @@ model CacheBreakFileLocksRequest {
   clientIp?: Azure.Core.ipV4Address;
 }
 
+/**
+ * Modify cluster peer request
+ */
+@added(Versions.v2025_12_15_preview)
+model ModifyClusterPeerRequest {
+  /**
+   * The new peer addresses array for the cluster.
+   * This array must contain all the existing peer addresses plus any new addresses to be added or removed.
+   * Existing addresses that are not included in this array will be removed from the cluster peer configuration.
+   */
+  newPeerAddresses: string[];
+}
+
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
@@ -657,6 +670,19 @@ interface Caches {
   breakFileLocks is ArmResourceActionAsync<
     Resource = Cache,
     Request = CacheBreakFileLocksRequest,
+    OptionalRequestBody = true,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Modify the cluster peer addresses for the cache's origin cluster.
+   */
+  @added(Versions.v2025_12_15_preview)
+  modifyClusterPeer is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = ModifyClusterPeerRequest,
     OptionalRequestBody = true,
     Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
