@@ -583,10 +583,11 @@ model CacheBreakFileLocksRequest {
 @added(Versions.v2025_12_15_preview)
 model ModifyClusterPeerRequest {
   /**
-   * The new peer addresses array for the cluster.
-   * This array must contain all the existing peer addresses plus any new addresses to be added or removed.
-   * Existing addresses that are not included in this array will be removed from the cluster peer configuration.
+   * The complete set of peer addresses for the cluster.
+   * This array replaces the existing peer addresses. Include all addresses you want to keep, plus any new addresses.
+   * Any existing addresses not included in this array will be removed from the cluster peer configuration.
    */
+  @minItems(1)
   newPeerAddresses: string[];
 }
 
@@ -683,7 +684,6 @@ interface Caches {
   modifyClusterPeer is ArmResourceActionAsync<
     Resource = Cache,
     Request = ModifyClusterPeerRequest,
-    OptionalRequestBody = true,
     Response = Cache,
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
