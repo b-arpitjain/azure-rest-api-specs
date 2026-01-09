@@ -6718,6 +6718,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Caches_ModifyClusterPeer": {
+            "$ref": "./examples/Caches_ModifyClusterPeer.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
