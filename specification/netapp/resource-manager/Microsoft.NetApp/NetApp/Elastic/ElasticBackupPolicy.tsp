@@ -103,9 +103,7 @@ interface ElasticBackupPolicies {
    * Patch the specified NetApp Elastic Backup Policy
    */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     ElasticBackupPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticBackupPolicy,

@@ -161,7 +161,9 @@ interface ElasticAccounts {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticAccount,
       ElasticAccountProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Delete the specified NetApp elastic account */

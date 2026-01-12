@@ -26,7 +26,8 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
     SegmentName = "caches",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
+  ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
@@ -64,11 +65,10 @@ model CacheProperties {
   /**
    * Set of export policy rules
    */
-  @identifiers(#["ruleIndex"])
-  exportPolicy?: ExportPolicyRule[];
+  exportPolicy?: CachePropertiesExportPolicy;
 
   /**
-   * Set of protocol types, default NFSv3, CIFS for SMB protocol
+   * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
    */
   protocolTypes?: ProtocolTypes[];
 
@@ -367,6 +367,17 @@ union LdapState {
 }
 
 /**
+ * Set of export policy rules
+ */
+model CachePropertiesExportPolicy {
+  /**
+   * Export policy rule
+   */
+  @identifiers(#["ruleIndex"])
+  rules?: ExportPolicyRule[];
+}
+
+/**
  * Flag indicating whether the global file lock is enabled for the cache.
  */
 @added(Versions.v2025_09_01_preview)
@@ -502,7 +513,7 @@ union SmbEncryptionState {
 }
 
 /**
- * Export policy rule
+ * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
@@ -616,7 +627,8 @@ interface Caches {
       Cache,
       CacheProperties
     >,
-    Response = ArmResourceUpdatedResponse<Cache> | ArmAcceptedLroResponse
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cache> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
