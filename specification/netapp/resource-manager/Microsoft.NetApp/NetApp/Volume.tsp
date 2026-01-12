@@ -491,6 +491,8 @@ union LdapServerType {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2025_09_01)
 union VolumeLanguage {
   string,
@@ -1139,6 +1141,8 @@ model ReplicationObject {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
@@ -2142,6 +2146,8 @@ union LargeVolumeType {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union BreakthroughMode {
   string,
 
@@ -2166,6 +2172,8 @@ union BreakthroughMode {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
@@ -2185,6 +2193,8 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
@@ -2224,6 +2234,8 @@ model QuotaReport {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareProtectionSettings {
   /**
    * The desired value of the Advanced Ransomware Protection feature state available to the volume
@@ -2243,6 +2255,8 @@ model RansomwareProtectionSettings {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareProtectionPatchSettings {
   /**
    * The desired value of the ARP feature state available to the volume
@@ -2256,6 +2270,8 @@ model RansomwareProtectionPatchSettings {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union DesiredRansomwareProtectionState {
   string,
 
@@ -2276,6 +2292,8 @@ union DesiredRansomwareProtectionState {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union ActualRansomwareProtectionState {
   string,
 

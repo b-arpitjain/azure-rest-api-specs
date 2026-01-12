@@ -18,6 +18,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @maxLength(1024)
 @minLength(1)
 scalar Extensions extends string;
@@ -31,6 +33,8 @@ scalar Extensions extends string;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(Volume)
 model RansomwareReport
   is Azure.ResourceManager.ProxyResource<RansomwareReportProperties> {
@@ -48,6 +52,8 @@ model RansomwareReport
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
 
 /**
@@ -60,6 +66,8 @@ model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareReportProperties {
   /**
    * The creation date and time of the report
@@ -112,6 +120,8 @@ model RansomwareReportProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareSuspectsClearRequest {
   /**
    * ARP report suspect resolution
@@ -131,6 +141,8 @@ model RansomwareSuspectsClearRequest {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model RansomwareSuspects {
   /**
    * Suspect File extension
@@ -164,6 +176,8 @@ model RansomwareSuspects {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model SuspectFile {
   /**
    * Suspect filename
@@ -184,6 +198,8 @@ model SuspectFile {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union RansomwareReportSeverity {
   string,
 
@@ -214,6 +230,8 @@ union RansomwareReportSeverity {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union RansomwareReportState {
   string,
 
@@ -234,6 +252,8 @@ union RansomwareReportState {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union RansomwareSuspectResolution {
   string,
 
@@ -251,6 +271,8 @@ union RansomwareSuspectResolution {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RansomwareReports {
   /**

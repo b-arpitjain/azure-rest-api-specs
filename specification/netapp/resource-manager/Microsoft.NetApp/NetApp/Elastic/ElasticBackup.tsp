@@ -20,6 +20,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(ElasticBackupVault)
 model ElasticBackup is ProxyResource<ElasticBackupProperties> {
   ...ResourceNameParameter<
@@ -36,6 +38,8 @@ model ElasticBackup is ProxyResource<ElasticBackupProperties> {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticBackupProperties {
   /** The creation date of the backup */
   @visibility(Lifecycle.Read)
@@ -107,6 +111,8 @@ model ElasticBackupProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union ElasticBackupType {
   string,
 
@@ -123,6 +129,8 @@ union ElasticBackupType {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union SnapshotUsage {
   string,
 
@@ -139,6 +147,8 @@ union SnapshotUsage {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union VolumeSize {
   string,
 

@@ -20,6 +20,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
   ...ResourceNameParameter<
@@ -37,6 +39,8 @@ model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticBackupVaultProperties {
   /**
    * Azure lifecycle management.

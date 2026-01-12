@@ -20,6 +20,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticAccount is TrackedResource<ElasticAccountProperties> {
   ...ResourceNameParameter<
     Resource = ElasticAccount,
@@ -37,6 +39,8 @@ model ElasticAccount is TrackedResource<ElasticAccountProperties> {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticAccountProperties {
   /**
    * Azure lifecycle management.
@@ -54,6 +58,8 @@ model ElasticAccountProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticEncryption {
   /** The encryption keySource (provider). Possible values (case-insensitive): Microsoft.NetApp, Microsoft.KeyVault */
   keySource?: KeySource;
@@ -71,6 +77,8 @@ model ElasticEncryption {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticKeyVaultProperties {
   /** The Uri of KeyVault. */
   keyVaultUri?: url;
@@ -99,6 +107,8 @@ model ElasticKeyVaultProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 union ElasticKeyVaultStatus {
   string,
 
@@ -124,6 +134,8 @@ union ElasticKeyVaultStatus {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticEncryptionIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
