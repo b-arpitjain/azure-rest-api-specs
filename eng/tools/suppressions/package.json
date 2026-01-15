@@ -12,11 +12,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-<<<<<<< HEAD
-    "lint": "cross-env DEBUG=eslint:eslint eslint",
-=======
     "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
->>>>>>> c6146419271c258d9689ea122a5c50618b8ee5e5
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
