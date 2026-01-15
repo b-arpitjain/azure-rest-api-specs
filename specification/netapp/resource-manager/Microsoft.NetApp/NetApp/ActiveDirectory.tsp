@@ -20,6 +20,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfig
   is TrackedResource<ActiveDirectoryConfigProperties> {
   ...ResourceNameParameter<
@@ -39,6 +41,8 @@ model ActiveDirectoryConfig
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigProperties {
@@ -62,6 +66,8 @@ model ActiveDirectoryConfigProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigCommonProperties {
@@ -104,6 +110,8 @@ model ActiveDirectoryConfigCommonProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model SecretPassword {
   /** Properties provided by KeyVault. */
   keyVaultProperties?: SecretPasswordKeyVaultProperties;
@@ -116,6 +124,8 @@ model SecretPassword {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordKeyVaultProperties {
@@ -134,6 +144,8 @@ model SecretPasswordKeyVaultProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model SecretPasswordIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
@@ -149,6 +161,8 @@ model SecretPasswordIdentity {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigPatchProperties {
   ...ActiveDirectoryConfigCommonProperties;
 
@@ -160,6 +174,8 @@ model ActiveDirectoryConfigPatchProperties {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordPatch {
@@ -174,6 +190,8 @@ model SecretPasswordPatch {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordKeyVaultPatchProperties {
@@ -192,18 +210,24 @@ interface ActiveDirectoryConfigs {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ActiveDirectoryConfig>;
 
   /** Create or update the specified active directory configuration */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ActiveDirectoryConfig>;
 
   /** Patch the specified active directory configuration */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ActiveDirectoryConfig,
@@ -218,6 +242,8 @@ interface ActiveDirectoryConfigs {
   /** Delete the specified Active Directory configuration */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ActiveDirectoryConfig>;
 
@@ -225,12 +251,16 @@ interface ActiveDirectoryConfigs {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   listByResourceGroup is ArmResourceListByParent<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the subscription */
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   listBySubscription is ArmListBySubscription<ActiveDirectoryConfig>;
 }
 

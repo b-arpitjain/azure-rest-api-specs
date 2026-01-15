@@ -95,6 +95,8 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ElasticBackupPolicy>;
 
   /**
@@ -103,12 +105,18 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupPolicy>;
 
   /**
    * Patch the specified NetApp Elastic Backup Policy
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   update is ArmCustomPatchAsync<
     ElasticBackupPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -123,6 +131,8 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
   /**
    * List and describe all Elastic Backup Policies in the elastic account.
@@ -130,6 +140,8 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupPolicy>;
 }
 

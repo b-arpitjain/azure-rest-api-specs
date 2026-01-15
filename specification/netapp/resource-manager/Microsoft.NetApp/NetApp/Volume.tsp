@@ -2163,18 +2163,42 @@ union BreakthroughMode {
 }
 
 /**
+ * Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model QuotaReportFilterRequest {
+  /**
+   * Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
+   */
+  quotaType?: Type;
+
+  /**
+   * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running 'id' or 'getent' command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>. If provided, quotaType must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota target, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
+   */
+  quotaTarget?: string;
+
+  /**
+   * The usageThresholdPercentage filter takes the usage threshold percentage and returns records where the usage is greater than or equal to the input value. This is an optional property.
+   */
+  @maxValue(100)
+  @minValue(1)
+  usageThresholdPercentage?: int32;
+}
+
+/**
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
-@removed(Versions.v2025_08_01)
+@removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
@@ -2189,13 +2213,12 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
-@removed(Versions.v2025_08_01)
+@removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
    * Type of quota
@@ -2691,14 +2714,36 @@ interface Volumes {
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
-  listQuotaReport is ArmResourceActionAsync<
+  @sharedRoute
+  @renamedFrom(Versions.v2025_12_01, "listQuotaReport")
+  listQuotaReportOld is ArmResourceActionAsync<
     Volume,
     void,
     ArmResponse<ListQuotaReportResponse>,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Get quota report for volume (with filter support)
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
+  listQuotaReport is ArmResourceActionAsync<
+    Volume,
+    /**
+     * The request body containing filter parameters for quota reports.
+     * This is optional and will be included in the body of the request.
+     */
+    QuotaReportFilterRequest,
+    ArmResponse<ListQuotaReportResponse>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 }
 

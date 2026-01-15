@@ -22,6 +22,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(SubscriptionLocationResource)
 model ElasticRegionInfoResource
   is Azure.ResourceManager.ProxyResource<ElasticRegionInfo> {
@@ -39,6 +41,8 @@ model ElasticRegionInfoResource
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticRegionInfo {
@@ -76,12 +80,16 @@ union ZoneAvailabilityStatus {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model ElasticRegionInfosList is Azure.Core.Page<ElasticRegionInfoResource>;
 
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 interface ElasticRegionInfoResources {
