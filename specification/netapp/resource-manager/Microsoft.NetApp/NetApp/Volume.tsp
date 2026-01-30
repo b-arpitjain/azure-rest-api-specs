@@ -345,6 +345,21 @@ model VolumeProperties {
   isDefaultQuotaEnabled?: boolean = false;
 
   /**
+   * Specifies whether the asynchronous directory delete feature is enabled for the volume.
+   */
+  @added(Versions.v2026_01_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
+
+  /**
+   * Name of the trash bin directory for deleted files. The name can only contain alphanumeric characters, underscores, hyphens, and dots.
+   */
+  @added(Versions.v2026_01_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBin?: string;
+
+  /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
   defaultUserQuotaInKiBs?: int64 = 0;
@@ -462,6 +477,20 @@ model VolumeProperties {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   breakthroughMode?: BreakthroughMode;
+}
+
+/**
+ * Specifies whether the asynchronous directory delete feature is enabled for the volume
+ */
+@added(Versions.v2026_01_15_preview)
+union AsyncDirectoryDelete {
+  string,
+
+  /** Enable Async Directory Delete */
+  Enable: "Enable",
+
+  /** Disable Async Directory Delete */
+  Disable: "Disable",
 }
 
 /**
@@ -1085,6 +1114,7 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
@@ -1099,6 +1129,7 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
@@ -1113,6 +1144,7 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
@@ -1127,6 +1159,7 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1141,8 +1174,7 @@ model ReplicationObject {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
+@added(Versions.v2026_01_01)
 @removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
@@ -1360,6 +1392,21 @@ model VolumePatchProperties {
    * Specifies if default quota is enabled for the volume.
    */
   isDefaultQuotaEnabled?: boolean;
+
+  /**
+   * Specifies whether the asynchronous directory delete feature is enabled for the volume.
+   */
+  @added(Versions.v2026_01_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
+
+  /**
+   * Name of the trash bin directory for deleted files. The name can only contain alphanumeric characters, underscores, hyphens, and dots.
+   */
+  @added(Versions.v2026_01_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBin?: string;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
