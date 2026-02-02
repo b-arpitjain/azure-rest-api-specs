@@ -357,7 +357,7 @@ model VolumeProperties {
   @minLength(1)
   @maxLength(255)
   @pattern("^[a-zA-Z0-9_.\\-]*$")
-  trashBin?: string;
+  trashBinName?: string;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -1403,7 +1403,7 @@ model VolumePatchProperties {
   @minLength(1)
   @maxLength(255)
   @pattern("^[a-zA-Z0-9_.\\-]*$")
-  trashBin?: string;
+  trashBinName?: string;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .

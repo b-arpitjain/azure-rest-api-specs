@@ -10,7 +10,7 @@
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
         "usageThreshold": 107374182400,
         "asyncDirectoryDelete": "Enable",
-        "trashBin": "trash"
+        "trashBinName": "trash"
       }
     },
     "poolName": "pool1",
@@ -35,7 +35,7 @@
           "throughputMibps": 128,
           "usageThreshold": 107374182400,
           "asyncDirectoryDelete": "Enable",
-          "trashBin": "trash"
+          "trashBinName": "trash"
         }
       }
     },
@@ -55,7 +55,7 @@
           "throughputMibps": 128,
           "usageThreshold": 107374182400,
           "asyncDirectoryDelete": "Enable",
-          "trashBin": "trash"
+          "trashBinName": "trash"
         }
       }
     },

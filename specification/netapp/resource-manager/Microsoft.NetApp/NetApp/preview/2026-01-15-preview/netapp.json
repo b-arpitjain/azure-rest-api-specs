@@ -22372,7 +22372,7 @@
           "$ref": "#/definitions/AsyncDirectoryDelete",
           "description": "Specifies whether the asynchronous directory delete feature is enabled for the volume."
         },
-        "trashBin": {
+        "trashBinName": {
           "type": "string",
           "description": "Name of the trash bin directory for deleted files. The name can only contain alphanumeric characters, underscores, hyphens, and dots.",
           "minLength": 1,
@@ -22949,7 +22949,7 @@
           "$ref": "#/definitions/AsyncDirectoryDelete",
           "description": "Specifies whether the asynchronous directory delete feature is enabled for the volume."
         },
-        "trashBin": {
+        "trashBinName": {
           "type": "string",
           "description": "Name of the trash bin directory for deleted files. The name can only contain alphanumeric characters, underscores, hyphens, and dots.",
           "minLength": 1,

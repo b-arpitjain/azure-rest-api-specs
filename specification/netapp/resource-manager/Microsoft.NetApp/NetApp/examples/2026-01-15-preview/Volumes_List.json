@@ -27,7 +27,7 @@
               "throughputMibps": 128,
               "usageThreshold": 107374182400,
               "asyncDirectoryDelete": "Enable",
-              "trashBin": "trash"
+              "trashBinName": "trash"
             }
           }
         ]
