@@ -353,6 +353,21 @@ model VolumeProperties {
   isDefaultQuotaEnabled?: boolean = false;
 
   /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  @added(Versions.v2026_03_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBinName?: string;
+
+  /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
   defaultUserQuotaInKiBs?: int64 = 0;
@@ -1387,6 +1402,21 @@ model VolumePatchProperties {
   isDefaultQuotaEnabled?: boolean;
 
   /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  @added(Versions.v2026_03_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBinName?: string;
+
+  /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
   defaultUserQuotaInKiBs?: int64;
@@ -2124,6 +2154,24 @@ union EnableSubvolumes {
 
   /**
    * subvolumes are not enabled
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Whether Async Directory Delete is enabled for the volume.
+ */
+@added(Versions.v2026_03_15_preview)
+union AsyncDirectoryDelete {
+  string,
+
+  /**
+   * Async Directory Delete is enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Async Directory Delete is disabled
    */
   Disabled: "Disabled",
 }

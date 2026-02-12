@@ -13603,6 +13603,30 @@
         ]
       }
     },
+    "AsyncDirectoryDelete": {
+      "type": "string",
+      "description": "Whether Async Directory Delete is enabled for the volume.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AsyncDirectoryDelete",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Async Directory Delete is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Async Directory Delete is disabled"
+          }
+        ]
+      }
+    },
     "AuthorizeRequest": {
       "type": "object",
       "description": "Authorize request",
@@ -22038,6 +22062,17 @@
           "type": "boolean",
           "description": "Specifies if default quota is enabled for the volume."
         },
+        "asyncDirectoryDelete": {
+          "$ref": "#/definitions/AsyncDirectoryDelete",
+          "description": "Specifies whether Async Directory Delete is enabled for the volume."
+        },
+        "trashBinName": {
+          "type": "string",
+          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.\\-]*$"
+        },
         "defaultUserQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
@@ -22603,6 +22638,17 @@
           "type": "boolean",
           "description": "Specifies if default quota is enabled for the volume.",
           "default": false
+        },
+        "asyncDirectoryDelete": {
+          "$ref": "#/definitions/AsyncDirectoryDelete",
+          "description": "Specifies whether Async Directory Delete is enabled for the volume."
+        },
+        "trashBinName": {
+          "type": "string",
+          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.\\-]*$"
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",

@@ -5,9 +5,11 @@
     "body": {
       "location": "eastus",
       "properties": {
+        "asyncDirectoryDelete": "Enabled",
         "creationToken": "my-unique-file-path",
         "serviceLevel": "Premium",
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+        "trashBinName": "trash",
         "usageThreshold": 107374182400
       }
     },
@@ -24,6 +26,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1",
         "location": "eastus",
         "properties": {
+          "asyncDirectoryDelete": "Enabled",
           "creationToken": "my-unique-file-path",
           "encryptionKeySource": "Microsoft.NetApp",
           "fileSystemId": "00000000-0000-0000-0000-000000000000",
@@ -31,6 +34,7 @@
           "serviceLevel": "Premium",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
           "throughputMibps": 128,
+          "trashBinName": "trash",
           "usageThreshold": 107374182400
         }
       }
@@ -42,6 +46,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1",
         "location": "eastus",
         "properties": {
+          "asyncDirectoryDelete": "Enabled",
           "creationToken": "my-unique-file-path",
           "encryptionKeySource": "Microsoft.NetApp",
           "fileSystemId": "00000000-0000-0000-0000-000000000000",
@@ -49,6 +54,7 @@
           "serviceLevel": "Premium",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
           "throughputMibps": 128,
+          "trashBinName": "trash",
           "usageThreshold": 107374182400
         }
       }
