@@ -73,8 +73,11 @@ model VolumeProperties {
   @removed(Versions.v2025_09_01_preview)
   @added(Versions.v2025_12_01)
   @removed(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
   @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -87,6 +90,8 @@ model VolumeProperties {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -281,6 +286,8 @@ model VolumeProperties {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -426,6 +433,8 @@ model VolumeProperties {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -454,6 +463,8 @@ model VolumeProperties {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -462,6 +473,8 @@ model VolumeProperties {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -493,6 +506,8 @@ union LdapServerType {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union VolumeLanguage {
   string,
 
@@ -1082,6 +1097,8 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
@@ -1096,6 +1113,8 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
@@ -1110,6 +1129,8 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
@@ -1124,6 +1145,8 @@ model ReplicationObject {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1139,6 +1162,8 @@ model ReplicationObject {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -1313,8 +1338,11 @@ model VolumePatchProperties {
   @removed(Versions.v2025_09_01_preview)
   @added(Versions.v2025_12_01)
   @removed(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
   @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1327,6 +1355,8 @@ model VolumePatchProperties {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -2139,6 +2169,8 @@ union LargeVolumeType {
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union BreakthroughMode {
   string,
 

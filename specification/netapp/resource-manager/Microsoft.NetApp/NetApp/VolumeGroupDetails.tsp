@@ -136,6 +136,8 @@ union ApplicationType {
    * Custom application type allows min 2 and max 12 data volumes in a volume group.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   CUSTOM: "CUSTOM",
 }
 

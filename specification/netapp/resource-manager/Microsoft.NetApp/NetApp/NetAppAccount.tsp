@@ -59,6 +59,8 @@ model AccountProperties {
    * Entra ID configuration for the account.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   entraIdConfig?: EntraIdConfig;
 
   /**
@@ -96,6 +98,8 @@ model AccountProperties {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   ldapConfiguration?: LdapConfiguration;
 }
 
@@ -103,6 +107,8 @@ model AccountProperties {
  * Entra ID configuration for the account.
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model EntraIdConfig {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -137,6 +143,8 @@ model EntraIdConfig {
  * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model EntraIdAkvConfig {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
@@ -164,6 +172,8 @@ model EntraIdAkvConfig {
  * NetApp account properties for PATCH operations
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model AccountPropertiesPatch {
   /**
    * Active Directories
@@ -205,11 +215,12 @@ model AccountPropertiesPatch {
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
-@removed(Versions.v2025_08_01)
+@removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2025_09_01)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
@@ -251,6 +262,8 @@ model LdapConfiguration {
  * LDAP configuration for PATCH operations (no default values)
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model LdapConfigurationPatch {
   /**
    * Name of the LDAP configuration domain
@@ -539,6 +552,8 @@ model EncryptionIdentity {
  * Entra ID Patch configuration for the account.
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model EntraIdConfigPatch {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -573,6 +588,8 @@ model EntraIdConfigPatch {
  * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model EntraIdAkvConfigPatch {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
@@ -633,6 +650,8 @@ model NetAppAccountPatch {
    * NetApp Account properties
    */
   @typeChangedFrom(Versions.v2025_12_15_preview, AccountProperties)
+  @typeChangedFrom(Versions.v2026_03_01, AccountPropertiesPatch)
+  @typeChangedFrom(Versions.v2026_03_15_preview, AccountProperties)
   properties?: AccountPropertiesPatch;
 
   /**
