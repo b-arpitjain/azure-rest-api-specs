@@ -1,11 +1,13 @@
-{
+﻿{
   "parameters": {
     "accountName": "account1",
     "api-version": "2026-03-15-preview",
     "body": {
       "properties": {
-        "asyncDirectoryDelete": "Enabled",
-        "trashBinName": "trash"
+        "asyncDirectoryDelete": {
+          "asyncDirectoryDeleteStatus": "Enabled",
+          "trashBinName": "trash"
+        }
       }
     },
     "poolName": "pool1",
@@ -21,7 +23,10 @@
         "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1",
         "location": "eastus",
         "properties": {
-          "asyncDirectoryDelete": "Enabled",
+          "asyncDirectoryDelete": {
+            "asyncDirectoryDeleteStatus": "Enabled",
+            "trashBinName": "trash"
+          },
           "creationToken": "my-unique-file-path",
           "dataProtection": {
             "snapshot": {
@@ -36,7 +41,6 @@
           "storageToNetworkProximity": "T2",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
           "throughputMibps": 128,
-          "trashBinName": "trash",
           "usageThreshold": 107374182400
         }
       }

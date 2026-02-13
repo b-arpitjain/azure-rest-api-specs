@@ -13603,7 +13603,44 @@
         ]
       }
     },
-    "AsyncDirectoryDelete": {
+    "AsyncDirectoryDeletePatchSettings": {
+      "type": "object",
+      "description": "Async Directory Delete updatable settings for the volume.",
+      "properties": {
+        "asyncDirectoryDeleteStatus": {
+          "$ref": "#/definitions/AsyncDirectoryDeleteStatus",
+          "description": "Specifies whether Async Directory Delete is enabled for the volume."
+        },
+        "trashBinName": {
+          "type": "string",
+          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.\\-]*$"
+        }
+      }
+    },
+    "AsyncDirectoryDeleteSettings": {
+      "type": "object",
+      "description": "Async Directory Delete settings for the volume.",
+      "properties": {
+        "asyncDirectoryDeleteStatus": {
+          "$ref": "#/definitions/AsyncDirectoryDeleteStatus",
+          "description": "Specifies whether Async Directory Delete is enabled for the volume."
+        },
+        "trashBinName": {
+          "type": "string",
+          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.\\-]*$"
+        }
+      },
+      "required": [
+        "asyncDirectoryDeleteStatus"
+      ]
+    },
+    "AsyncDirectoryDeleteStatus": {
       "type": "string",
       "description": "Whether Async Directory Delete is enabled for the volume.",
       "enum": [
@@ -13611,7 +13648,7 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "AsyncDirectoryDelete",
+        "name": "AsyncDirectoryDeleteStatus",
         "modelAsString": true,
         "values": [
           {
@@ -22063,15 +22100,8 @@
           "description": "Specifies if default quota is enabled for the volume."
         },
         "asyncDirectoryDelete": {
-          "$ref": "#/definitions/AsyncDirectoryDelete",
-          "description": "Specifies whether Async Directory Delete is enabled for the volume."
-        },
-        "trashBinName": {
-          "type": "string",
-          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9_.\\-]*$"
+          "$ref": "#/definitions/AsyncDirectoryDeletePatchSettings",
+          "description": "Async Directory Delete settings for the volume."
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",
@@ -22640,15 +22670,8 @@
           "default": false
         },
         "asyncDirectoryDelete": {
-          "$ref": "#/definitions/AsyncDirectoryDelete",
-          "description": "Specifies whether Async Directory Delete is enabled for the volume."
-        },
-        "trashBinName": {
-          "type": "string",
-          "description": "The name of the Trash bin folder for deleted files. Max length of 255.",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9_.\\-]*$"
+          "$ref": "#/definitions/AsyncDirectoryDeleteSettings",
+          "description": "Async Directory Delete settings for the volume."
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",

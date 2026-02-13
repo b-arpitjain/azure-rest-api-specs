@@ -353,19 +353,10 @@ model VolumeProperties {
   isDefaultQuotaEnabled?: boolean = false;
 
   /**
-   * Specifies whether Async Directory Delete is enabled for the volume.
+   * Async Directory Delete settings for the volume.
    */
   @added(Versions.v2026_03_15_preview)
-  asyncDirectoryDelete?: AsyncDirectoryDelete;
-
-  /**
-   * The name of the Trash bin folder for deleted files. Max length of 255.
-   */
-  @added(Versions.v2026_03_15_preview)
-  @minLength(1)
-  @maxLength(255)
-  @pattern("^[a-zA-Z0-9_.\\-]*$")
-  trashBinName?: string;
+  asyncDirectoryDelete?: AsyncDirectoryDeleteSettings;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -1402,19 +1393,10 @@ model VolumePatchProperties {
   isDefaultQuotaEnabled?: boolean;
 
   /**
-   * Specifies whether Async Directory Delete is enabled for the volume.
+   * Async Directory Delete settings for the volume.
    */
   @added(Versions.v2026_03_15_preview)
-  asyncDirectoryDelete?: AsyncDirectoryDelete;
-
-  /**
-   * The name of the Trash bin folder for deleted files. Max length of 255.
-   */
-  @added(Versions.v2026_03_15_preview)
-  @minLength(1)
-  @maxLength(255)
-  @pattern("^[a-zA-Z0-9_.\\-]*$")
-  trashBinName?: string;
+  asyncDirectoryDelete?: AsyncDirectoryDeletePatchSettings;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -2162,7 +2144,7 @@ union EnableSubvolumes {
  * Whether Async Directory Delete is enabled for the volume.
  */
 @added(Versions.v2026_03_15_preview)
-union AsyncDirectoryDelete {
+union AsyncDirectoryDeleteStatus {
   string,
 
   /**
@@ -2174,6 +2156,44 @@ union AsyncDirectoryDelete {
    * Async Directory Delete is disabled
    */
   Disabled: "Disabled",
+}
+
+/**
+ * Async Directory Delete settings for the volume.
+ */
+@added(Versions.v2026_03_15_preview)
+model AsyncDirectoryDeleteSettings {
+  /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  asyncDirectoryDeleteStatus: AsyncDirectoryDeleteStatus;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255.
+   */
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBinName?: string;
+}
+
+/**
+ * Async Directory Delete updatable settings for the volume.
+ */
+@added(Versions.v2026_03_15_preview)
+model AsyncDirectoryDeletePatchSettings {
+  /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  asyncDirectoryDeleteStatus?: AsyncDirectoryDeleteStatus;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255.
+   */
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9_.\\-]*$")
+  trashBinName?: string;
 }
 
 /**
